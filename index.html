@@ -1,0 +1,2257 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+default-src 'self';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline' https:;
+img-src 'self' data: https:;
+font-src 'self' https: data:;
+connect-src 'self' https:;
+frame-ancestors 'none';
+form-action 'self' mailto:;
+base-uri 'self';
+object-src 'none';
+"
+    />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ============================================================
+     SECURITY HEADERS (meta layer — reforçados pelo .htaccess)
+     ============================================================ -->
+
+    <!-- Content Security Policy
+     Fontes permitidas explicitamente; bloqueia inline scripts não-nonce,
+     eval(), data: URIs em scripts, e todos os frames. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+    default-src 'self';
+    script-src 'self' 'nonce-JJA2026secure';
+    style-src  'self' 'nonce-JJA2026secure' https://fonts.googleapis.com;
+    font-src   https://fonts.gstatic.com;
+    img-src    'self' data:;
+    connect-src 'none';
+    frame-src  'none';
+    object-src 'none';
+    base-uri   'self';
+    form-action 'none';
+    upgrade-insecure-requests;
+  "
+    />
+
+    <!-- Bloqueia sniffing de MIME type -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+    <!-- Bloqueia clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+
+    <!-- Não envia URL de origem para destinos externos -->
+    <meta name="referrer" content="no-referrer" />
+
+    <!-- Desactiva funcionalidades de browser desnecessárias -->
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    />
+
+    <!-- Força re-validação de cache — impede servir conteúdo stale -->
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+
+    <!-- SEO -->
+    <title>Jone Juma Amade — Designer &amp; Desenvolvedor Web em Maputo</title>
+    <meta
+      name="description"
+      content="Designer gráfico e desenvolvedor web freelancer em Maputo, Moçambique. Criação de sites, landing pages, logos, identidade visual e social media design."
+    />
+    <meta
+      name="keywords"
+      content="designer moçambique, desenvolvedor web maputo, freelancer moçambique, criação de sites, logos, identidade visual, landing page"
+    />
+    <meta
+      property="og:title"
+      content="Jone Juma Amade — Designer &amp; Desenvolvedor Web"
+    />
+    <meta
+      property="og:description"
+      content="Transformo ideias em experiências digitais memoráveis. Baseado em Maputo, Moçambique."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon inline seguro -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff6b1a'/%3E%3Ctext y='24' x='5' font-size='20' font-weight='bold' fill='white'%3EJ%3C/text%3E%3C/svg%3E"
+    />
+
+    <!-- Google Fonts com crossorigin para SRI futuro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+      nonce="JJA2026secure"
+    />
+
+    <style nonce="JJA2026secure">
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #08090c;
+        --bg2: #0e1017;
+        --bg3: #161820;
+        --surface: #12141c;
+        --border: rgba(255, 255, 255, 0.06);
+        --border2: rgba(255, 255, 255, 0.12);
+        --text: #eeeae2;
+        --muted: #6b6e7a;
+        --muted2: #9496a1;
+        --orange: #ff6b1a;
+        --orange-glow: rgba(255, 107, 26, 0.15);
+        --blue: #1a6bff;
+        --blue2: #4a8cff;
+        --font-display: "Bebas Neue", sans-serif;
+        --font-body: "Cabinet Grotesk", sans-serif;
+        --font-serif: "Instrument Serif", serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        cursor: none;
+      }
+      .cursor {
+        width: 10px;
+        height: 10px;
+        background: var(--orange);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.2s,
+          height 0.2s;
+      }
+      .cursor-ring {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(255, 107, 26, 0.4);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1000;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.75rem 3rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        transition:
+          background 0.3s,
+          border-bottom 0.3s;
+      }
+      nav.scrolled {
+        background: rgba(8, 9, 12, 0.92);
+        backdrop-filter: blur(20px);
+        border-bottom: 0.5px solid var(--border);
+      }
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+        color: var(--text);
+        text-decoration: none;
+      }
+      .nav-logo span {
+        color: var(--orange);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--muted2);
+        text-decoration: none;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+      }
+      .nav-contact {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--orange);
+        text-decoration: none;
+        border: 1px solid rgba(255, 107, 26, 0.3);
+        padding: 0.5rem 1.25rem;
+        border-radius: 100px;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+        letter-spacing: 0.04em;
+      }
+      .nav-contact:hover {
+        background: var(--orange-glow);
+        border-color: var(--orange);
+      }
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 3rem 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--font-display);
+        font-size: clamp(100px, 20vw, 260px);
+        color: rgba(255, 255, 255, 0.018);
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+      }
+      .hero-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+      }
+      .orb-1 {
+        width: 550px;
+        height: 550px;
+        background: rgba(255, 107, 26, 0.07);
+        top: -120px;
+        right: -120px;
+      }
+      .orb-2 {
+        width: 420px;
+        height: 420px;
+        background: rgba(26, 107, 255, 0.05);
+        bottom: -40px;
+        left: -100px;
+      }
+      .hero-location {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 0.8s 0.2s forwards;
+      }
+      .hero-location::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--orange);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.8);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-name {
+        font-family: var(--font-display);
+        font-size: clamp(4rem, 12vw, 10rem);
+        line-height: 0.92;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        opacity: 0;
+        animation: fadeUp 0.8s 0.35s forwards;
+      }
+      .hero-name .accent {
+        color: var(--orange);
+      }
+      .hero-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 2.5rem;
+        opacity: 0;
+        animation: fadeUp 0.8s 0.55s forwards;
+      }
+      .hero-tagline {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: clamp(1rem, 2vw, 1.4rem);
+        color: var(--muted2);
+        max-width: 380px;
+        line-height: 1.5;
+      }
+      .hero-tagline strong {
+        font-style: normal;
+        color: var(--text);
+        font-family: var(--font-body);
+        font-weight: 500;
+      }
+      .hero-cta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+      .btn-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--orange);
+        color: #fff;
+        padding: 0.9rem 2rem;
+        border-radius: 100px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        box-shadow: 0 0 40px rgba(255, 107, 26, 0.28);
+      }
+      .btn-main:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 60px rgba(255, 107, 26, 0.44);
+      }
+      .scroll-hint {
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .marquee-wrapper {
+        overflow: hidden;
+        padding: 1.5rem 0;
+        border-top: 0.5px solid var(--border);
+        border-bottom: 0.5px solid var(--border);
+        background: var(--bg2);
+      }
+      .marquee-track {
+        display: flex;
+        gap: 3rem;
+        animation: marquee 28s linear infinite;
+        width: max-content;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .marquee-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .marquee-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--orange);
+        flex-shrink: 0;
+      }
+      section {
+        padding: 7rem 3rem;
+        position: relative;
+      }
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--orange);
+        margin-bottom: 1.25rem;
+      }
+      .section-tag::before {
+        content: "";
+        width: 20px;
+        height: 1px;
+        background: var(--orange);
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        margin-bottom: 1rem;
+      }
+      .badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 5px 12px;
+        border-radius: 100px;
+        border: 0.5px solid;
+      }
+      .badge-orange {
+        color: var(--orange);
+        border-color: rgba(255, 107, 26, 0.3);
+        background: rgba(255, 107, 26, 0.06);
+      }
+      .badge-blue {
+        color: var(--blue2);
+        border-color: rgba(26, 107, 255, 0.3);
+        background: rgba(26, 107, 255, 0.06);
+      }
+      .badge-gray {
+        color: var(--muted2);
+        border-color: var(--border2);
+        background: var(--bg3);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+        margin-top: 4rem;
+      }
+      .about-card {
+        background: var(--surface);
+        border: 0.5px solid var(--border2);
+        border-radius: 20px;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .about-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--orange),
+          var(--blue),
+          transparent
+        );
+      }
+      .about-initials {
+        font-family: var(--font-display);
+        font-size: 6rem;
+        line-height: 1;
+        color: var(--text);
+        margin-bottom: 1rem;
+        letter-spacing: 0.02em;
+      }
+      .about-initials span {
+        color: var(--orange);
+      }
+      .about-badge-row {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+      }
+      .floating-tag {
+        position: absolute;
+        background: var(--surface);
+        border: 0.5px solid rgba(255, 107, 26, 0.3);
+        border-radius: 12px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        bottom: -18px;
+        right: -18px;
+        color: var(--orange);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+      .ft-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--orange);
+        animation: pulse 2s infinite;
+      }
+      .about-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .about-text p {
+        color: var(--muted2);
+        line-height: 1.8;
+        font-weight: 300;
+        font-size: 1.05rem;
+      }
+      .about-text p strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .about-text p em {
+        color: var(--orange);
+        font-style: normal;
+      }
+      .about-year {
+        font-family: var(--font-display);
+        font-size: 5rem;
+        color: rgba(255, 255, 255, 0.04);
+        line-height: 1;
+        margin-top: -1rem;
+        user-select: none;
+      }
+      .skills-section {
+        background: var(--bg2);
+        border-top: 0.5px solid var(--border);
+        border-bottom: 0.5px solid var(--border);
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 0.5px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 4rem;
+      }
+      .skill-card {
+        background: var(--surface);
+        padding: 2.5rem;
+        transition: background 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .skill-card:hover {
+        background: var(--bg3);
+      }
+      .skill-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--orange);
+        transition: width 0.3s;
+      }
+      .skill-card:hover::after {
+        width: 100%;
+      }
+      .skill-number {
+        font-family: var(--font-display);
+        font-size: 3.5rem;
+        color: rgba(255, 107, 26, 0.1);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+      .skill-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+      .skill-desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 300;
+      }
+      .skill-level {
+        display: flex;
+        gap: 3px;
+        margin-top: 1.25rem;
+      }
+      .level-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--border2);
+      }
+      .level-dot.filled {
+        background: var(--orange);
+      }
+      .services-list {
+        margin-top: 4rem;
+        border-top: 0.5px solid var(--border);
+      }
+      .service-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 0;
+        border-bottom: 0.5px solid var(--border);
+        cursor: default;
+        transition: padding 0.25s;
+        gap: 2rem;
+      }
+      .service-item:hover {
+        padding: 2rem 1rem;
+      }
+      .service-item:hover .service-arrow {
+        color: var(--orange);
+        transform: rotate(-45deg);
+      }
+      .service-left {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .service-num {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        min-width: 32px;
+      }
+      .service-name {
+        font-family: var(--font-display);
+        font-size: clamp(1.3rem, 3vw, 2.2rem);
+        letter-spacing: 0.01em;
+        color: var(--text);
+        transition: color 0.2s;
+      }
+      .service-item:hover .service-name {
+        color: var(--orange);
+      }
+      .service-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .service-arrow {
+        font-size: 1.5rem;
+        color: var(--muted);
+        transition:
+          color 0.2s,
+          transform 0.25s;
+        flex-shrink: 0;
+      }
+      .process-section {
+        background: var(--bg2);
+        border-top: 0.5px solid var(--border);
+        border-bottom: 0.5px solid var(--border);
+      }
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 0.5px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 4rem;
+      }
+      .process-step {
+        background: var(--surface);
+        padding: 2.5rem 2rem;
+        transition: background 0.25s;
+      }
+      .process-step:hover {
+        background: var(--bg3);
+      }
+      .step-num {
+        font-family: var(--font-display);
+        font-size: 4rem;
+        line-height: 1;
+        color: rgba(255, 107, 26, 0.1);
+        margin-bottom: 0.75rem;
+      }
+      .step-icon {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .step-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .step-desc {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.65;
+        font-weight: 300;
+      }
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 4rem;
+      }
+      .port-card {
+        border-radius: 20px;
+        overflow: hidden;
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        transition:
+          transform 0.3s,
+          border-color 0.25s;
+        cursor: pointer;
+        position: relative;
+      }
+      .port-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--border2);
+      }
+      .port-card.featured {
+        grid-column: 1/-1;
+      }
+      .port-thumb {
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background: var(--bg3);
+      }
+      .port-card.featured .port-thumb {
+        height: 300px;
+      }
+      .port-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 107, 26, 0.07);
+        opacity: 0;
+        transition: opacity 0.25s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .port-card:hover .port-overlay {
+        opacity: 1;
+      }
+      .port-overlay-icon {
+        font-size: 2rem;
+        filter: drop-shadow(0 0 16px var(--orange));
+      }
+      .port-info {
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .port-cat {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--orange);
+        margin-bottom: 0.3rem;
+      }
+      .port-name {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.25rem;
+      }
+      .port-desc {
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .port-link {
+        color: var(--muted);
+        font-size: 1.2rem;
+        transition: color 0.2s;
+        flex-shrink: 0;
+      }
+      .port-card:hover .port-link {
+        color: var(--orange);
+      }
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 4rem;
+      }
+      .testimonial-card {
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        transition: border-color 0.25s;
+      }
+      .testimonial-card:hover {
+        border-color: var(--border2);
+      }
+      .testimonial-card::before {
+        content: '"';
+        font-family: var(--font-serif);
+        font-size: 5rem;
+        color: rgba(255, 107, 26, 0.15);
+        position: absolute;
+        top: 0.5rem;
+        left: 1.5rem;
+        line-height: 1;
+      }
+      .testimonial-text {
+        font-size: 0.92rem;
+        color: var(--muted2);
+        line-height: 1.75;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+        padding-top: 1.5rem;
+        font-style: italic;
+      }
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .author-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        background: rgba(255, 107, 26, 0.12);
+        color: var(--orange);
+        flex-shrink: 0;
+      }
+      .author-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .author-role {
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+      .stars {
+        color: var(--orange);
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+        letter-spacing: 2px;
+      }
+      .contact-section {
+        background: var(--bg2);
+        border-top: 0.5px solid var(--border);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        margin-top: 4rem;
+        align-items: start;
+      }
+      .cta-big {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 8vw, 6rem);
+        line-height: 0.95;
+        letter-spacing: 0.01em;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+      }
+      .cta-big span {
+        color: var(--orange);
+      }
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .contact-link-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        background: var(--surface);
+        border: 0.5px solid var(--border);
+        border-radius: 14px;
+        text-decoration: none;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .contact-link-item:hover {
+        border-color: var(--orange);
+        transform: translateX(4px);
+      }
+      .cli-icon {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+      .cli-label {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .cli-value {
+        font-size: 0.95rem;
+        color: var(--text);
+        font-weight: 500;
+      }
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .form-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .form-input,
+      .form-textarea {
+        background: var(--surface);
+        border: 0.5px solid var(--border2);
+        border-radius: 12px;
+        padding: 0.9rem 1.25rem;
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+      }
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: var(--orange);
+      }
+      .form-textarea {
+        resize: vertical;
+        min-height: 130px;
+      }
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: var(--muted);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .btn-submit {
+        background: var(--orange);
+        color: #fff;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 100px;
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          opacity 0.2s;
+        box-shadow: 0 0 30px rgba(255, 107, 26, 0.2);
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+      .btn-submit:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 0 50px rgba(255, 107, 26, 0.38);
+      }
+      .btn-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .form-success {
+        display: none;
+        background: rgba(255, 107, 26, 0.08);
+        border: 0.5px solid rgba(255, 107, 26, 0.3);
+        border-radius: 12px;
+        padding: 1.25rem;
+        color: var(--orange);
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .form-error {
+        display: none;
+        background: rgba(220, 38, 38, 0.08);
+        border: 0.5px solid rgba(220, 38, 38, 0.3);
+        border-radius: 12px;
+        padding: 0.75rem 1.25rem;
+        color: #ef4444;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+      }
+      footer {
+        border-top: 0.5px solid var(--border);
+        padding: 3rem;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 2rem;
+      }
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+      }
+      .footer-logo span {
+        color: var(--orange);
+      }
+      .footer-copy {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+        line-height: 1.7;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: flex-end;
+      }
+      .footer-links a {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--orange);
+      }
+      .back-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        background: var(--orange);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.1rem;
+        cursor: pointer;
+        z-index: 400;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .back-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .back-top:hover {
+        box-shadow: 0 0 20px rgba(255, 107, 26, 0.4);
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      ::-webkit-scrollbar {
+        width: 3px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--orange);
+        border-radius: 2px;
+      }
+      @media (max-width: 900px) {
+        nav {
+          padding: 1.25rem 1.5rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        section {
+          padding: 5rem 1.5rem;
+        }
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .skills-grid,
+        .process-steps {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+        .port-card.featured {
+          grid-column: auto;
+        }
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding: 0 1.5rem 4rem;
+        }
+        .hero-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2rem;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        footer {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .footer-links {
+          justify-content: center;
+        }
+      }
+
+      .port-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+      .port-card:hover .port-thumb img {
+        transform: scale(1.05);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <button class="back-top" id="backTop" aria-label="Voltar ao topo">↑</button>
+
+    <nav id="nav">
+      <a href="#" class="nav-logo">JJA<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="nav-contact">Falar comigo</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-bg-text" aria-hidden="true">JONE</div>
+      <div class="orb-1 hero-orb" aria-hidden="true"></div>
+      <div class="orb-2 hero-orb" aria-hidden="true"></div>
+      <div class="hero-location">Maputo, Moçambique</div>
+      <h1 class="hero-name">
+        JONE<br />JUMA<br /><span class="accent">AMADE.</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-tagline">
+          Designer Gráfico &amp; Desenvolvedor Web.<br />
+          <strong>Transformo ideias em experiências digitais</strong> que
+          impressionam e conquistam clientes.
+        </p>
+        <div class="hero-cta">
+          <a href="#portfolio" class="btn-main">
+            Ver projetos
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </a>
+          <span class="scroll-hint" aria-hidden="true"
+            >↓ scroll para explorar</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-wrapper" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Adobe Illustrator
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Adobe Photoshop
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          HTML &amp; CSS
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          JavaScript
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Logos &amp; Branding
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Identidade Visual
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Social Media Design
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Flyers &amp; Banners
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Landing Pages
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Suporte Informático
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Adobe Illustrator
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Adobe Photoshop
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          HTML &amp; CSS
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          JavaScript
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Logos &amp; Branding
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Identidade Visual
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Social Media Design
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Flyers &amp; Banners
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Landing Pages
+        </div>
+        <div class="marquee-item">
+          <div class="marquee-dot"></div>
+          Suporte Informático
+        </div>
+      </div>
+    </div>
+
+    <section id="sobre">
+      <div class="reveal">
+        <p class="section-tag">Sobre mim</p>
+        <h2>QUEM SOU<br />EU?</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-card">
+            <div class="about-initials" aria-hidden="true">
+              JJ<span>A</span>
+            </div>
+            <p
+              style="
+                color: var(--muted2);
+                font-size: 0.9rem;
+                font-weight: 300;
+                line-height: 1.8;
+              "
+            >
+              Formado em Suporte Informático<br />
+              Instituto Mártir Cipriano de Nacuxa, 2023<br />
+              <span style="color: var(--muted); font-size: 0.82rem"
+                >Natural de Nampula · Residente em Maputo</span
+              >
+            </p>
+            <div class="about-badge-row">
+              <span class="badge badge-orange">Designer Gráfico</span>
+              <span class="badge badge-blue">Dev Web</span>
+              <span class="badge badge-gray">Freelancer</span>
+              <span class="badge badge-gray">Moçambique</span>
+            </div>
+          </div>
+          <div class="floating-tag">
+            <div class="ft-dot"></div>
+            Disponível para projetos
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p>
+            Olá — sou <strong>Jone Juma Amade</strong>, criativo moçambicano
+            natural de <em>Nampula</em>, a trabalhar em <em>Maputo</em>. Combino
+            design gráfico e desenvolvimento web para criar soluções digitais
+            que realmente funcionam.
+          </p>
+          <p>
+            Formado em <strong>Suporte Informático</strong>, tornei-me
+            autodidata em design e web — trabalho com
+            <strong>Adobe Illustrator e Photoshop</strong> para criar logos,
+            identidades visuais, flyers, banners e conteúdo para redes sociais,
+            e com <strong>HTML, CSS e JavaScript</strong> para construir sites
+            modernos e responsivos.
+          </p>
+          <p>
+            Para mim, cada projeto é uma <em>oportunidade de impressionar</em>.
+            Do primeiro briefing ao resultado final — entrego com atenção a cada
+            detalhe.
+          </p>
+          <div class="about-year" aria-hidden="true">2023</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-section" id="skills">
+      <div class="reveal">
+        <p class="section-tag">Habilidades</p>
+        <h2>O QUE<br />DOMINO</h2>
+      </div>
+      <div class="skills-grid reveal">
+        <div class="skill-card">
+          <div class="skill-number" aria-hidden="true">01</div>
+          <div class="skill-name">Adobe Illustrator</div>
+          <div class="skill-desc">
+            Logos, identidades visuais, flyers e banners. Materiais gráficos
+            originais e criativos para qualquer negócio.
+          </div>
+          <div class="skill-level" aria-label="Nível 4 de 5">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-number" aria-hidden="true">02</div>
+          <div class="skill-name">Adobe Photoshop</div>
+          <div class="skill-desc">
+            Posts para redes sociais, banners, flyers e materiais publicitários
+            prontos para impressão e digital.
+          </div>
+          <div class="skill-level" aria-label="Nível 3 de 5">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-number" aria-hidden="true">03</div>
+          <div class="skill-name">HTML &amp; CSS</div>
+          <div class="skill-desc">
+            Páginas web modernas, responsivas e visualmente atraentes — a base
+            de tudo o que aparece no ecrã.
+          </div>
+          <div class="skill-level" aria-label="Nível 4 de 5">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-number" aria-hidden="true">04</div>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-desc">
+            Em constante aprendizagem — interatividade, animações e lógica nos
+            projetos web. Sem JS não há site completo.
+          </div>
+          <div class="skill-level" aria-label="Nível 2 de 5">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-number" aria-hidden="true">05</div>
+          <div class="skill-name">Suporte Informático</div>
+          <div class="skill-desc">
+            Instalação, manutenção, diagnóstico e resolução de problemas em
+            sistemas e redes — formação base sólida.
+          </div>
+          <div class="skill-level" aria-label="Nível 5 de 5">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-number" aria-hidden="true">06</div>
+          <div class="skill-name">Desenvolvimento Web</div>
+          <div class="skill-desc">
+            Websites, landing pages e portfólios — do design ao código,
+            entregues prontos a publicar e a impressionar.
+          </div>
+          <div class="skill-level" aria-label="Nível 4 de 5">
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot filled"></div>
+            <div class="level-dot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="reveal">
+        <p class="section-tag">O que ofereço</p>
+        <h2>SERVIÇOS</h2>
+      </div>
+      <div class="services-list reveal">
+        <div class="service-item">
+          <div class="service-left">
+            <span class="service-num">01</span
+            ><span class="service-name">SITES INSTITUCIONAIS</span>
+          </div>
+          <div class="service-tags">
+            <span class="badge badge-orange">HTML/CSS/JS</span
+            ><span class="badge badge-gray">Responsivo</span>
+          </div>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="service-item">
+          <div class="service-left">
+            <span class="service-num">02</span
+            ><span class="service-name">LANDING PAGES</span>
+          </div>
+          <div class="service-tags">
+            <span class="badge badge-orange">Alta conversão</span
+            ><span class="badge badge-gray">Entrega rápida</span>
+          </div>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="service-item">
+          <div class="service-left">
+            <span class="service-num">03</span
+            ><span class="service-name">IDENTIDADE VISUAL</span>
+          </div>
+          <div class="service-tags">
+            <span class="badge badge-blue">Illustrator</span
+            ><span class="badge badge-gray">Logo &amp; Branding</span>
+          </div>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="service-item">
+          <div class="service-left">
+            <span class="service-num">04</span
+            ><span class="service-name">DESIGN GRÁFICO</span>
+          </div>
+          <div class="service-tags">
+            <span class="badge badge-blue">Photoshop</span
+            ><span class="badge badge-gray">Flyers &amp; Banners</span>
+          </div>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="service-item">
+          <div class="service-left">
+            <span class="service-num">05</span
+            ><span class="service-name">SOCIAL MEDIA DESIGN</span>
+          </div>
+          <div class="service-tags">
+            <span class="badge badge-orange">Posts &amp; Stories</span
+            ><span class="badge badge-gray">Instagram · Facebook</span>
+          </div>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
+        <div class="service-item">
+          <div class="service-left">
+            <span class="service-num">06</span
+            ><span class="service-name">SUPORTE INFORMÁTICO</span>
+          </div>
+          <div class="service-tags">
+            <span class="badge badge-gray">Manutenção</span
+            ><span class="badge badge-gray">Diagnóstico</span>
+          </div>
+          <span class="service-arrow" aria-hidden="true">→</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <div class="reveal">
+        <p class="section-tag">Como trabalho</p>
+        <h2>O MEU<br />PROCESSO</h2>
+      </div>
+      <div class="process-steps reveal">
+        <div class="process-step">
+          <div class="step-num" aria-hidden="true">01</div>
+          <div class="step-icon" aria-hidden="true">💬</div>
+          <div class="step-title">Briefing</div>
+          <div class="step-desc">
+            Ouvir tudo sobre o teu projecto — objectivos, público, referências e
+            prazos.
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num" aria-hidden="true">02</div>
+          <div class="step-icon" aria-hidden="true">✏️</div>
+          <div class="step-title">Conceito</div>
+          <div class="step-desc">
+            Proposta visual e estrutural — cores, tipografia, layout e rascunhos
+            iniciais para aprovação.
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num" aria-hidden="true">03</div>
+          <div class="step-icon" aria-hidden="true">🔨</div>
+          <div class="step-title">Desenvolvimento</div>
+          <div class="step-desc">
+            Construção do projecto final com revisões incluídas e atenção máxima
+            ao detalhe.
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num" aria-hidden="true">04</div>
+          <div class="step-icon" aria-hidden="true">🚀</div>
+          <div class="step-title">Entrega</div>
+          <div class="step-desc">
+            Ficheiros finais organizados, site publicado ou artes aprovadas —
+            tudo limpo e pronto a usar.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="portfolio"
+      style="background: var(--bg2); border-top: 0.5px solid var(--border)"
+    >
+      <div class="reveal">
+        <p class="section-tag">Trabalhos</p>
+        <h2>PORTFOLIO</h2>
+      </div>
+      <div class="portfolio-grid reveal">
+        <div class="port-card featured">
+          <div class="port-thumb">
+            <div class="port-overlay" aria-hidden="true">
+              <span class="port-overlay-icon">↗</span>
+            </div>
+            <img src="/img/portfolio.png" alt="" />
+          </div>
+          <div class="port-info">
+            <div class="port-meta">
+              <div class="port-cat">Desenvolvimento Web</div>
+              <div class="port-name">Portfolio Pessoal — JJA</div>
+              <div class="port-desc">
+                Este mesmo site — HTML, CSS e JavaScript puro. Design moderno,
+                dark mode, animações e totalmente responsivo.
+              </div>
+            </div>
+            <span class="port-link" aria-hidden="true">↗</span>
+          </div>
+        </div>
+        <div class="port-card">
+          <div class="port-thumb">
+            <div class="port-overlay" aria-hidden="true">
+              <span class="port-overlay-icon">↗</span>
+            </div>
+            <img src="/img/SERTIVE-IDV.png" alt="" />
+          </div>
+          <div class="port-info">
+            <div class="port-meta">
+              <div class="port-cat">Identidade Visual</div>
+              <div class="port-name">Branding &amp; Logo Design</div>
+              <div class="port-desc">
+                Logótipos e identidades visuais completas para negócios e marcas
+                pessoais em Moçambique.
+              </div>
+            </div>
+            <span class="port-link" aria-hidden="true">↗</span>
+          </div>
+        </div>
+        <div class="port-card">
+          <div class="port-thumb">
+            <div class="port-overlay" aria-hidden="true">
+              <span class="port-overlay-icon">↗</span>
+            </div>
+            <img src="/img/Social.jpg" alt="" />
+          </div>
+          <div class="port-info">
+            <div class="port-meta">
+              <div class="port-cat">Social Media Design</div>
+              <div class="port-name">Posts &amp; Stories</div>
+              <div class="port-desc">
+                Conteúdo visual para Instagram e Facebook com identidade visual
+                consistente e impactante.
+              </div>
+            </div>
+            <span class="port-link" aria-hidden="true">↗</span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="reveal"
+        style="
+          margin-top: 2.5rem;
+          padding: 1.5rem 2rem;
+          background: var(--surface);
+          border: 0.5px solid var(--border);
+          border-left: 2px solid var(--orange);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        "
+      >
+        <span aria-hidden="true" style="font-size: 1.3rem">📌</span>
+        <p
+          style="
+            font-size: 0.875rem;
+            color: var(--muted2);
+            font-weight: 300;
+            line-height: 1.7;
+          "
+        >
+          Este portfolio está em crescimento. Tens um projeto e queres aparecer
+          aqui?
+          <a
+            href="#contacto"
+            style="
+              color: var(--orange);
+              text-decoration: none;
+              font-weight: 500;
+            "
+            >Fala comigo →</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="reveal">
+        <p class="section-tag">O que dizem</p>
+        <h2>DEPOI&shy;MENTOS</h2>
+      </div>
+      <div class="testimonials-grid reveal">
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            O Jone entregou o logo da nossa empresa em tempo recorde e o
+            resultado ficou exactamente como queríamos. Design limpo,
+            profissional e moderno. Recomendo sem hesitar.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">MA</div>
+            <div>
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <div class="author-name">Aruna M.</div>
+              <div class="author-role">Empresário, Maputo</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            Criou os posts para as nossas redes sociais e a diferença foi
+            imediata. Muito criativo, atento aos detalhes e sempre disponível
+            para ajustes. Excelente profissional!
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">HV</div>
+            <div>
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <div class="author-name">Óptica Healthy Vision, Lda</div>
+              <div class="author-role">Empresa, Nampula</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            Landing page entregue em 5 dias, com design que superou as minhas
+            expectativas. Profissional sério, comunicação excelente do início ao
+            fim do projecto.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">EM</div>
+            <div>
+              <div class="stars" aria-label="5 estrelas">★★★★★</div>
+              <div class="author-name">Equi-Med</div>
+              <div class="author-role">Empresa, Maputo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+      <div class="reveal">
+        <p class="section-tag">Vamos trabalhar juntos</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="cta-big">TENS UM<br /><span>PROJECTO?</span></div>
+          <p
+            style="
+              color: var(--muted2);
+              font-size: 1.05rem;
+              font-weight: 300;
+              line-height: 1.8;
+              max-width: 400px;
+              margin-bottom: 1.5rem;
+            "
+          >
+            Seja um site, um logo, um flyer ou conteúdo para redes sociais —
+            conta-me a tua ideia e respondo em menos de 24 horas.
+          </p>
+          <div class="contact-links">
+            <!-- Email protegido: montado por JS, nunca exposto em HTML raw -->
+            <a href="#" class="contact-link-item" id="emailLink">
+              <span class="cli-icon" aria-hidden="true">📧</span>
+              <div>
+                <div class="cli-label">Email</div>
+                <div class="cli-value" id="emailDisplay">A carregar...</div>
+              </div>
+            </a>
+            <a
+              href="https://wa.me/258866757428"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-link-item"
+            >
+              <span class="cli-icon" aria-hidden="true">💬</span>
+              <div>
+                <div class="cli-label">WhatsApp</div>
+                <div class="cli-value">+258 86 675 7428</div>
+              </div>
+            </a>
+            <a
+              href="https://www.instagram.com/jonejumaamade/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-link-item"
+            >
+              <span class="cli-icon" aria-hidden="true">📸</span>
+              <div>
+                <div class="cli-label">Instagram</div>
+                <div class="cli-value">Jone Juma Amade</div>
+              </div>
+            </a>
+            <a
+              href="https://linkedin.com/in/jone-juma-amade"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-link-item"
+            >
+              <span class="cli-icon" aria-hidden="true">💼</span>
+              <div>
+                <div class="cli-label">LinkedIn</div>
+                <div class="cli-value">Jone Juma Amade</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="reveal">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fieldNome">Nome</label>
+                <input
+                  type="text"
+                  id="fieldNome"
+                  class="form-input"
+                  placeholder="O teu nome"
+                  maxlength="100"
+                  autocomplete="name"
+                />
+                <div class="form-error" id="errNome">
+                  Por favor insere o teu nome.
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="fieldTel"
+                  >WhatsApp / Telefone</label
+                >
+                <input
+                  type="tel"
+                  id="fieldTel"
+                  class="form-input"
+                  placeholder="+258 ..."
+                  maxlength="20"
+                  autocomplete="tel"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldEmail">Email</label>
+              <input
+                type="email"
+                id="fieldEmail"
+                class="form-input"
+                placeholder="teu@email.com"
+                maxlength="150"
+                autocomplete="email"
+              />
+              <div class="form-error" id="errEmail">
+                Por favor insere um email válido.
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldServico"
+                >Tipo de serviço</label
+              >
+              <select
+                id="fieldServico"
+                class="form-input"
+                style="cursor: pointer"
+              >
+                <option value="">Seleciona o serviço</option>
+                <option value="Site Institucional">Site Institucional</option>
+                <option value="Landing Page">Landing Page</option>
+                <option value="Identidade Visual / Logo">
+                  Identidade Visual / Logo
+                </option>
+                <option value="Design Gráfico">
+                  Design Gráfico (Flyers/Banners)
+                </option>
+                <option value="Social Media Design">Social Media Design</option>
+                <option value="Suporte Informático">Suporte Informático</option>
+                <option value="Outro">Outro</option>
+              </select>
+              <div class="form-error" id="errServico">
+                Por favor seleciona um serviço.
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldMsg"
+                >Descreve o teu projecto</label
+              >
+              <textarea
+                id="fieldMsg"
+                class="form-textarea"
+                placeholder="Quanto mais detalhes melhor — objectivos, prazo, referências..."
+                maxlength="2000"
+              ></textarea>
+              <div class="form-error" id="errMsg">
+                Por favor descreve o teu projecto.
+              </div>
+            </div>
+            <button type="submit" class="btn-submit" id="submitBtn">
+              Enviar mensagem →
+            </button>
+            <div class="form-success" id="formSuccess">
+              ✅ Mensagem enviada! Responderei em breve.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">JJA<span>.</span></div>
+      <div class="footer-copy">
+        © 2026 Jone Juma Amade<br /><span
+          style="font-size: 0.75rem; color: var(--muted)"
+          >Natural de Nampula · Baseado em Maputo, Moçambique</span
+        >
+      </div>
+      <div class="footer-links">
+        <a
+          href="https://www.instagram.com/jonejumaamade/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Instagram</a
+        >
+        <a
+          href="https://linkedin.com/in/jone-juma-amade"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >
+        <a
+          href="https://wa.me/258866757428"
+          target="_blank"
+          rel="noopener noreferrer"
+          >WhatsApp</a
+        >
+      </div>
+    </footer>
+
+    <script nonce="JJA2026secure">
+      (function () {
+        "use strict";
+
+        /* ── SANITIZAÇÃO ─────────────────────────────────────────────────────────── */
+        function sanitize(str) {
+          if (typeof str !== "string") return "";
+          return str
+            .trim()
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#x27;")
+            .replace(/\//g, "&#x2F;");
+        }
+
+        /* ── EMAIL OBFUSCATION (protege do scraping de bots) ────────────────────── */
+        /* O endereço está dividido e só é montado em runtime pelo JS.               */
+        /* Bots que não executam JS nunca vêem o endereço completo.                  */
+        const _u = "jonejumaamadeofficial";
+        const _d = "gmail";
+        const _t = "com";
+        const email = _u + "@" + _d + "." + _t;
+        const emailEl = document.getElementById("emailDisplay");
+        const emailLink = document.getElementById("emailLink");
+        if (emailEl && emailLink) {
+          emailEl.textContent = email;
+          emailLink.href = "mailto:" + email;
+        }
+
+        /* ── CURSOR PERSONALIZADO ────────────────────────────────────────────────── */
+        const cursor = document.getElementById("cursor");
+        const ring = document.getElementById("cursorRing");
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+        document.addEventListener(
+          "mousemove",
+          function (e) {
+            mx = e.clientX;
+            my = e.clientY;
+            cursor.style.left = mx + "px";
+            cursor.style.top = my + "px";
+          },
+          { passive: true },
+        );
+        (function loop() {
+          rx += (mx - rx) * 0.12;
+          ry += (my - ry) * 0.12;
+          ring.style.left = rx + "px";
+          ring.style.top = ry + "px";
+          requestAnimationFrame(loop);
+        })();
+        document
+          .querySelectorAll(
+            "a,button,input,textarea,select,.service-item,.port-card,.skill-card,.process-step,.testimonial-card",
+          )
+          .forEach(function (el) {
+            el.addEventListener("mouseenter", function () {
+              cursor.style.width = "16px";
+              cursor.style.height = "16px";
+              ring.style.width = "52px";
+              ring.style.height = "52px";
+            });
+            el.addEventListener("mouseleave", function () {
+              cursor.style.width = "10px";
+              cursor.style.height = "10px";
+              ring.style.width = "36px";
+              ring.style.height = "36px";
+            });
+          });
+
+        /* ── NAV + BACK TO TOP ───────────────────────────────────────────────────── */
+        var nav = document.getElementById("nav");
+        var bt = document.getElementById("backTop");
+        window.addEventListener(
+          "scroll",
+          function () {
+            nav.classList.toggle("scrolled", window.scrollY > 50);
+            bt.classList.toggle("visible", window.scrollY > 400);
+          },
+          { passive: true },
+        );
+        bt.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        /* ── REVEAL ON SCROLL ────────────────────────────────────────────────────── */
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) e.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.08 },
+        );
+        document.querySelectorAll(".reveal").forEach(function (r) {
+          obs.observe(r);
+        });
+
+        /* ── VALIDAÇÃO DE FORMULÁRIO ─────────────────────────────────────────────── */
+        function showErr(id, show) {
+          var el = document.getElementById(id);
+          if (el) el.style.display = show ? "block" : "none";
+        }
+        function validateEmail(v) {
+          return /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(v);
+        }
+        function validateName(v) {
+          return (
+            v.length >= 2 && v.length <= 100 && /^[\p{L}\s'\-\.]+$/u.test(v)
+          );
+        }
+        function validateMessage(v) {
+          return v.trim().length >= 10 && v.trim().length <= 2000;
+        }
+        function validatePhone(v) {
+          if (!v) return true; // opcional
+          return /^[\+\d\s\-\(\)]{7,20}$/.test(v);
+        }
+
+        /* ── RATE LIMITING DO FORMULÁRIO (client-side — complemento ao .htaccess) ── */
+        var _lastSubmit = 0;
+        var _submitCount = 0;
+        var COOLDOWN_MS = 30000; // 30s entre envios
+        var MAX_SUBMITS = 3; // max 3 tentativas por sessão
+
+        document
+          .getElementById("contactForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            var now = Date.now();
+            var btn = document.getElementById("submitBtn");
+            var successEl = document.getElementById("formSuccess");
+
+            /* Rate limit */
+            if (_submitCount >= MAX_SUBMITS) {
+              alert(
+                "Muitas tentativas. Por favor tenta mais tarde ou contacta directamente via WhatsApp.",
+              );
+              return;
+            }
+            if (now - _lastSubmit < COOLDOWN_MS && _lastSubmit !== 0) {
+              var wait = Math.ceil((COOLDOWN_MS - (now - _lastSubmit)) / 1000);
+              alert(
+                "Por favor aguarda " +
+                  wait +
+                  " segundos antes de enviar novamente.",
+              );
+              return;
+            }
+
+            /* Leitura dos valores */
+            var nome = document.getElementById("fieldNome").value;
+            var tel = document.getElementById("fieldTel").value;
+            var emailVal = document.getElementById("fieldEmail").value;
+            var servico = document.getElementById("fieldServico").value;
+            var msg = document.getElementById("fieldMsg").value;
+
+            /* Validação rigorosa */
+            var valid = true;
+            showErr("errNome", !validateName(nome));
+            if (!validateName(nome)) valid = false;
+            showErr("errEmail", !validateEmail(emailVal));
+            if (!validateEmail(emailVal)) valid = false;
+            showErr("errServico", !servico);
+            if (!servico) valid = false;
+            showErr("errMsg", !validateMessage(msg));
+            if (!validateMessage(msg)) valid = false;
+            if (!validatePhone(tel)) {
+              valid = false;
+              alert("Número de telefone inválido.");
+            }
+            if (!valid) return;
+
+            /* Sanitização antes de usar em qualquer contexto */
+            var sNome = sanitize(nome);
+            var sTel = sanitize(tel);
+            var sEmail = sanitize(emailVal);
+            var sServico = sanitize(servico);
+            var sMsg = sanitize(msg);
+
+            /* Construção segura do mailto (nunca innerHTML) */
+            var subject = "Pedido de orçamento — " + sServico;
+            var body =
+              "Nome: " +
+              sNome +
+              "\nTelefone: " +
+              sTel +
+              "\nEmail: " +
+              sEmail +
+              "\nServiço: " +
+              sServico +
+              "\n\nMensagem:\n" +
+              sMsg;
+
+            /* Desactiva botão durante o envio */
+            btn.disabled = true;
+            btn.textContent = "A enviar...";
+
+            window.location.href =
+              "mailto:" +
+              email +
+              "?subject=" +
+              encodeURIComponent(subject) +
+              "&body=" +
+              encodeURIComponent(body);
+
+            _lastSubmit = Date.now();
+            _submitCount++;
+
+            /* Feedback visual */
+            successEl.style.display = "block";
+            setTimeout(function () {
+              successEl.style.display = "none";
+              btn.disabled = false;
+              btn.textContent = "Enviar mensagem →";
+            }, 6000);
+          });
+      })(); // IIFE — nenhuma variável vaza para o scope global
+    </script>
+
+    <script>
+      (function () {
+        function sanitize(input) {
+          return input.replace(/[<>&"'`]/g, function (c) {
+            return {
+              "<": "&lt;",
+              ">": "&gt;",
+              "&": "&amp;",
+              '"': "&quot;",
+              "'": "&#39;",
+              "`": "&#96;",
+            }[c];
+          });
+        }
+
+        var lastSubmit = 0;
+        var submitCount = 0;
+
+        try {
+          var stored = JSON.parse(localStorage.getItem("rateLimit") || "{}");
+          if (stored.lastSubmit) lastSubmit = stored.lastSubmit;
+          if (stored.submitCount) submitCount = stored.submitCount;
+        } catch (e) {}
+
+        function persist() {
+          localStorage.setItem(
+            "rateLimit",
+            JSON.stringify({
+              lastSubmit: lastSubmit,
+              submitCount: submitCount,
+            }),
+          );
+        }
+
+        var form = document.querySelector("form");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            var now = Date.now();
+
+            if (now - lastSubmit < 5000 || submitCount > 5) {
+              e.preventDefault();
+              alert("Too many requests. Try again later.");
+              return;
+            }
+
+            var inputs = form.querySelectorAll("input, textarea");
+            inputs.forEach(function (input) {
+              input.value = sanitize(input.value);
+            });
+
+            lastSubmit = now;
+            submitCount++;
+            persist();
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
