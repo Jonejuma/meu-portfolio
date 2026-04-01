@@ -160,6 +160,10 @@ object-src 'none';
         z-index: 9998;
         transform: translate(-50%, -50%);
       }
+      @media (pointer: coarse) {
+        .cursor, .cursor-ring { display: none; }
+        body { cursor: auto; }
+      }
       body::before {
         content: "";
         position: fixed;
@@ -1141,12 +1145,59 @@ object-src 'none';
         background: var(--orange);
         border-radius: 2px;
       }
+
+      .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 600;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(8,9,12,.97);
+  z-index: 550;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  letter-spacing: .08em;
+  color: var(--text);
+  text-decoration: none;
+  transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--orange); }
+      
       @media (max-width: 900px) {
         nav {
           padding: 1.25rem 1.5rem;
         }
         .nav-links {
           display: none;
+        }
+        .hamburger {
+          display:flex;
         }
         section {
           padding: 5rem 1.5rem;
@@ -1215,9 +1266,20 @@ object-src 'none';
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
+     <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+       <span></span>
+       <span></span>
+       <span></span>
+     </button>
       <a href="#contacto" class="nav-contact">Falar comigo</a>
     </nav>
-
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#sobre"     id="mm-sobre">Sobre</a>
+      <a href="#skills"    id="mm-skills">Skills</a>
+      <a href="#servicos"  id="mm-servicos">Serviços</a>
+      <a href="#portfolio" id="mm-portfolio">Portfolio</a>
+      <a href="#contacto"  id="mm-contacto">Contacto</a>
+</div>
     <section class="hero">
       <div class="hero-bg-text" aria-hidden="true">JONE</div>
       <div class="orb-1 hero-orb" aria-hidden="true"></div>
@@ -2053,6 +2115,27 @@ object-src 'none';
         /* ── NAV + BACK TO TOP ───────────────────────────────────────────────────── */
         var nav = document.getElementById("nav");
         var bt = document.getElementById("backTop");
+        
+        /* ── MENU MOBILE ─────────────────────────────────────────── */
+        var hamburger   = document.getElementById('hamburger');
+        var mobileMenu  = document.getElementById('mobileMenu');
+        
+        function toggleMenu() {
+          hamburger.classList.toggle('open');
+          mobileMenu.classList.toggle('open');
+          document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        }
+        
+        hamburger.addEventListener('click', toggleMenu);
+        
+        /* Fecha ao clicar num link */
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+          });
+        });
         window.addEventListener(
           "scroll",
           function () {
