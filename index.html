@@ -2127,7 +2127,12 @@ object-src 'none';
         }
         
         hamburger.addEventListener('click', toggleMenu);
-        
+
+        /* Fecha ao clicar no fundo */
+        mobileMenu.addEventListener('click', function(e) {
+          if (e.target === mobileMenu) toggleMenu();
+        });
+      
         /* Fecha ao clicar num link */
         mobileMenu.querySelectorAll('a').forEach(function(link) {
           link.addEventListener('click', function() {
