@@ -1946,7 +1946,7 @@ object-src 'none';
               <input
                 type="email"
                 id="fieldEmail"
-                name="_replyto"
+                name="email"
                 class="form-input"
                 placeholder="teu@email.com"
                 maxlength="150"
@@ -2005,6 +2005,7 @@ object-src 'none';
             <div class="form-success" id="formSuccess">
               ✅ Mensagem enviada! Responderei em breve.
             </div>
+            <input type="hidden" name="_replyto" value="">
           </form>
         </div>
       </div>
@@ -2286,6 +2287,7 @@ object-src 'none';
                   if(el) el.style.display = "none";
                 });
 
+                document.querySelector('input[name="_replyto"]').value = document.getElementById("fieldEmail").value;
                 successEl.style.display = "block";
                 _lastSubmit = Date.now();
                 _submitCount++;
