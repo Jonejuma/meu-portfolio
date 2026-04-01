@@ -1847,17 +1847,18 @@ object-src 'none';
           </div>
         </div>
         <div class="reveal">
-          <form class="contact-form" id="contactForm" novalidate>
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/xojpdnvw" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="fieldNome">Nome</label>
                 <input
                   type="text"
                   id="fieldNome"
+                  name="nome"
                   class="form-input"
                   placeholder="O teu nome"
                   maxlength="100"
-                  autocomplete="name"
+                  autocomplete="name" required
                 />
                 <div class="form-error" id="errNome">
                   Por favor insere o teu nome.
@@ -1874,6 +1875,7 @@ object-src 'none';
                   placeholder="+258 ..."
                   maxlength="20"
                   autocomplete="tel"
+                  name="telefone"
                 />
               </div>
             </div>
@@ -1885,7 +1887,7 @@ object-src 'none';
                 class="form-input"
                 placeholder="teu@email.com"
                 maxlength="150"
-                autocomplete="email"
+                autocomplete="email" required
               />
               <div class="form-error" id="errEmail">
                 Por favor insere um email válido.
@@ -1899,6 +1901,7 @@ object-src 'none';
                 id="fieldServico"
                 class="form-input"
                 style="cursor: pointer"
+                name="servico" required
               >
                 <option value="">Seleciona o serviço</option>
                 <option value="Site Institucional">Site Institucional</option>
@@ -1926,6 +1929,7 @@ object-src 'none';
                 class="form-textarea"
                 placeholder="Quanto mais detalhes melhor — objectivos, prazo, referências..."
                 maxlength="2000"
+                name="mensagem" required
               ></textarea>
               <div class="form-error" id="errMsg">
                 Por favor descreve o teu projecto.
@@ -2174,24 +2178,49 @@ object-src 'none';
             btn.disabled = true;
             btn.textContent = "A enviar...";
 
-            window.location.href =
-              "mailto:" +
-              email +
-              "?subject=" +
-              encodeURIComponent(subject) +
-              "&body=" +
-              encodeURIComponent(body);
+            fetch("https://formspree.io/f/xojpdnvw", {
+              method: "POST",
+              headers: { "Accept": "application/json" },
+              body: new FormData(document.getElementById("contactForm"))
+            })
+            .then(function(response) {
+              if (response.ok) {
+                document.getElementById("fieldNome").value    = "";
+                document.getElementById("fieldTel").value     = "";
+                document.getElementById("fieldEmail").value   = "";
+                document.getElementById("fieldServico").value = "";
+                document.getElementById("fieldMsg").value     = "";
 
-            _lastSubmit = Date.now();
-            _submitCount++;
+                ["errNome","errEmail","errServico","errMsg"].forEach(function(id){
+                  var el = document.getElementById(id);
+                  if(el) el.style.display = "none";
+                });
 
-            /* Feedback visual */
-            successEl.style.display = "block";
-            setTimeout(function () {
-              successEl.style.display = "none";
-              btn.disabled = false;
+                successEl.style.display = "block";
+                _lastSubmit = Date.now();
+                _submitCount++;
+
+                setTimeout(function() {
+                  successEl.style.display = "none";
+                  btn.disabled    = false;
+                  btn.textContent = "Enviar mensagem →";
+                }, 6000);
+              } else {
+                return response.json().then(function(data) {
+                  var msg = (data && data.errors)
+                    ? data.errors.map(function(e){ return e.message; }).join(", ")
+                    : "Erro ao enviar. Por favor tenta via WhatsApp.";
+                  alert(msg);
+                  btn.disabled    = false;
+                  btn.textContent = "Enviar mensagem →";
+                });
+              }
+            })
+            .catch(function() {
+              alert("Sem ligação. Por favor tenta via WhatsApp: +258 86 675 7428");
+              btn.disabled    = false;
               btn.textContent = "Enviar mensagem →";
-            }, 6000);
+            });
           });
       })(); // IIFE — nenhuma variável vaza para o scope global
     </script>
