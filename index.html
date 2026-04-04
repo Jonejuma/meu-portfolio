@@ -1,50 +1,13 @@
 <!doctype html>
 <html lang="pt">
   <head>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-default-src 'self';
-script-src 'self' 'unsafe-inline';
-style-src 'self' 'unsafe-inline' https:;
-img-src 'self' data: https:;
-font-src 'self' https: data:;
-connect-src 'self' https:;
-frame-ancestors 'none';
-form-action 'self' mailto:;
-base-uri 'self';
-object-src 'none';
-"
-    />
+    
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ============================================================
-     SECURITY HEADERS (meta layer — reforçados pelo .htaccess)
-     ============================================================ -->
-
-    <!-- Content Security Policy
-     Fontes permitidas explicitamente; bloqueia inline scripts não-nonce,
-     eval(), data: URIs em scripts, e todos os frames. -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-    default-src 'self';
-    script-src 'self' 'nonce-JJA2026secure';
-    style-src  'self' 'nonce-JJA2026secure' https://fonts.googleapis.com;
-    font-src   https://fonts.gstatic.com;
-    img-src    'self' data:;
-    connect-src https://formspree.io;
-    frame-src  'none';
-    object-src 'none';
-    base-uri   'self';
-    form-action 'self' https://formspree.io;;
-    upgrade-insecure-requests;
-  "
-    />
 
     <!-- Bloqueia sniffing de MIME type -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -96,10 +59,9 @@ object-src 'none';
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
-      nonce="JJA2026secure"
     />
 
-    <style nonce="JJA2026secure">
+    <style>
       *,
       *::before,
       *::after {
@@ -2041,7 +2003,7 @@ object-src 'none';
       </div>
     </footer>
 
-    <script nonce="JJA2026secure">
+    <script>
       (function () {
         "use strict";
 
@@ -2191,8 +2153,8 @@ object-src 'none';
         }
 
         /* ── RATE LIMITING DO FORMULÁRIO (client-side — complemento ao .htaccess) ── */
-        var _lastSubmit = 0;
-        var _submitCount = 0;
+        var _lastSubmit  = parseInt(sessionStorage.getItem('ls') || '0');
+        var _submitCount = parseInt(sessionStorage.getItem('sc') || '0');
         var COOLDOWN_MS = 30000; // 30s entre envios
         var MAX_SUBMITS = 3; // max 3 tentativas por sessão
 
@@ -2291,6 +2253,8 @@ object-src 'none';
                 successEl.style.display = "block";
                 _lastSubmit = Date.now();
                 _submitCount++;
+                sessionStorage.setItem('ls', _lastSubmit);
+                sessionStorage.setItem('sc', _submitCount);
 
                 setTimeout(function() {
                   successEl.style.display = "none";
@@ -2331,9 +2295,6 @@ object-src 'none';
             }[c];
           });
         }
-
-        var lastSubmit = 0;
-        var submitCount = 0;
 
         try {
           var stored = JSON.parse(localStorage.getItem("rateLimit") || "{}");
